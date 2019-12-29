@@ -39,7 +39,7 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-      - run ansible:
+      - run:
           name: run ansible
           commands:
             ansible -v
