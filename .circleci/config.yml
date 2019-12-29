@@ -41,7 +41,7 @@ jobs:
 
       - run:
           name: run ansible
-          commands:
+          command:  |
             ansible -v
 
       - store_artifacts:
