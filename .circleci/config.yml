@@ -43,7 +43,7 @@ jobs:
           name: run ansible
           command:  |
             sudo pip install ansible
-            ansible -v
+            sudo ansible -v
 
       - store_artifacts:
           path: test-reports
