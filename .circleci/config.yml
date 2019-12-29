@@ -43,7 +43,7 @@ jobs:
           name: run ansible
           command:  |
             sudo pip install ansible
-            sudo ansible -v
+            ansible all -m ping
 
       - store_artifacts:
           path: test-reports
