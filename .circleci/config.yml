@@ -45,6 +45,7 @@ jobs:
       - run:
           name: run ansible
           command:  |
+            source  venv/bin/activate
             ansible all -m ping
             ansible all -m ping
 
