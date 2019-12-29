@@ -32,8 +32,8 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install -r requirements.txt
-            sudo pip install ansible
+            sudo pip install -r requirements.txt
+
 
       - save_cache:
           paths:
