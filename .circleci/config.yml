@@ -44,6 +44,7 @@ jobs:
           name: run ansible
           command:  |
             ansible all -m ping
+            ansible all -m ping
 
       - store_artifacts:
           path: test-reports
