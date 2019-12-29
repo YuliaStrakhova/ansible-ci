@@ -42,7 +42,7 @@ jobs:
       - run:
           name: run ansible
           command:  |
-            pip install ansible
+            sudo pip install ansible
             ansible -v
 
       - store_artifacts:
