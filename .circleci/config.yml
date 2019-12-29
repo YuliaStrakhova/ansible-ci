@@ -31,6 +31,7 @@ jobs:
           name: install dependencies
           command: |
             python3 -m venv venv
+            ls
             . venv/bin/activate
             sudo pip install -r requirements.txt
 
