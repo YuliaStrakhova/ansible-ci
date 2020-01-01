@@ -51,7 +51,7 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-      - run: cat ~/repo/.circleci/ssh.config
+
       - run:
           name: run ansible
           command:  |
