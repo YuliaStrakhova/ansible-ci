@@ -24,7 +24,7 @@
         region: "{{ region }}"
         instance_type: t3.micro
         key_name: for-github
-        group: ["'{{prefix}}-group'"]
+        group: ["'{{ prefix }}-group'"]
         assign_public_ip: yes
         instance_tags: { Name: ansiblebook, type: one, env: test }
         vpc_subnet_id: subnet-056a36446d0695b33
