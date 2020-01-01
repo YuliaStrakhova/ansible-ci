@@ -2,6 +2,7 @@
   hosts: localhost
   vars:
     prefix: ansible-learning
+    region: us-east-1
 
 
 
@@ -9,7 +10,7 @@
   tasks:
     - name: ssh security group
         ec2_group:
-          name: "{{prefix}}-group"
+          name: "{{ prefix }}-group"
           description: allow ssh access
           region: "{{ region }}"
           rules:
@@ -21,7 +22,7 @@
       ec2:
         name: "{{prefix}}-instance"
         image: ami-00068cd7555f543d5
-        region: us-east-1
+        region: "{{ region }}"
         instance_type: t3.micro
         key_name: for-github
         group: ["{{prefix}}-group"]
