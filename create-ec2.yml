@@ -10,17 +10,16 @@
   tasks:
     - name: ssh security group
       ec2_group:
-          name: "{{ prefix }}-group"
-          description: allow ssh access
-          region: "{{ region }}"
-          rules:
-            - proto: tcp
-              from_port: 22
-              to_port: 22
-              cidr_ip: 0.0.0.0/0
+        name: "{{ prefix }}-group"
+        description: allow ssh access
+        region: "{{ region }}"
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
     - name: start the instance
       ec2:
-        name: "{{prefix}}-instance"
         image: ami-00068cd7555f543d5
         region: "{{ region }}"
         instance_type: t3.micro
