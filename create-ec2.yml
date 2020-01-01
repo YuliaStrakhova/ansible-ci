@@ -8,4 +8,4 @@
         instance_type: t3.micro
         #key_name: mykey
         #group: [web, ssh, outbound]
-        #instance_tags: { Name: ansiblebook, type: web, env: production }
+        instance_tags: { Name: ansiblebook, type: one, env: test }
