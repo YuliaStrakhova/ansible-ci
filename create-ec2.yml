@@ -36,5 +36,5 @@
       register: ec2
 
     - name: wait for ssh server to be running
-      wait_for: host={{ item.public_dns_name }} port=22 search_regex=OpenSSH
+      wait_for: host={{ item.public_ip_address }} port=22 search_regex=OpenSSH
       with_items: "{{ ec2.instances }}"
