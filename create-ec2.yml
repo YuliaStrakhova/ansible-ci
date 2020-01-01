@@ -9,7 +9,7 @@
 
   tasks:
     - name: ssh security group
-        ec2_group:
+      ec2_group:
           name: "{{ prefix }}-group"
           description: allow ssh access
           region: "{{ region }}"
