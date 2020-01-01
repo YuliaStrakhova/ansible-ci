@@ -40,7 +40,9 @@ jobs:
           command: |
             python3 -m venv venv
             pwd
-            ls -a /home
+            cd ~
+            pwd
+            ls -a
             echo $0
             source  venv/bin/activate
             pip install -r requirements.txt
