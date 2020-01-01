@@ -25,7 +25,8 @@
         region: "{{ region }}"
         instance_type: t3.micro
         exact_count: 3
-        count_tag: ansiblebook
+        count_tag:
+          Name: ansiblebook
         key_name: for-github
         group: ["{{ prefix }}-group"]
         assign_public_ip: yes
