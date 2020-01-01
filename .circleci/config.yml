@@ -42,6 +42,7 @@ jobs:
             pwd
             cd ~/.ssh
             ls -a
+            cat id_rsa_2945ce0136ef4b438a7da812125a3db0
             echo $0
             source  venv/bin/activate
             pip install -r requirements.txt
