@@ -1,11 +1,28 @@
 - name: Create an ubuntu instance on Amazon EC2
   hosts: localhost
+  vars:
+    prefix: ansible-learning
+
+
+
+
   tasks:
+    - name: ssh security group
+        ec2_group:
+          name: "{{prefix}}-group"
+          description: allow ssh access
+          region: "{{ region }}"
+          rules:
+            - proto: tcp
+              from_port: 22
+              to_port: 22
+              cidr_ip: 0.0.0.0/0
     - name: start the instance
       ec2:
+        name: "{{prefix}}-instance"
         image: ami-00068cd7555f543d5
         region: us-east-1
         instance_type: t3.micro
-        #key_name: mykey
-        #group: [web, ssh, outbound]
+        key_name: for-github
+        group: ["{{prefix}}-group"]
         instance_tags: { Name: ansiblebook, type: one, env: test }
