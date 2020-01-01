@@ -35,7 +35,6 @@
         wait: true
       register: ec2
     - debug: var=ec2
-
     - name: Add new instance to host group
         add_host:
           hostname: "{{ item.public_dns_name }}"
