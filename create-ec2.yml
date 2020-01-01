@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
     - name: start the instance
-      ec2:
+      ec2_instance:
         image: ami-006cda581cf39451b
         region: eu-north-1
         instance_type: t3.micro
