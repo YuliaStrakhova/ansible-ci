@@ -19,6 +19,7 @@
             from_port: 22
             to_port: 22
             cidr_ip: 0.0.0.0/0
+
     - name: start the instance
       ec2:
         image: ami-00068cd7555f543d5
@@ -34,12 +35,14 @@
         vpc_subnet_id: subnet-056a36446d0695b33
         wait: true
       register: ec2
+
     - debug: var=ec2
+
     - name: Add new instance to host group
-        add_host:
+      add_host:
           hostname: "{{ item.public_dns_name }}"
           groupname: ec2_launched
-        loop: "{{ ec2.instances }}"
+      loop: "{{ ec2.instances }}"
 
     - name: wait for ssh server to be running
       wait_for: host={{ item.public_dns_name }} port=22 search_regex=OpenSSH
