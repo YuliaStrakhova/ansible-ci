@@ -48,9 +48,7 @@
       wait_for: host={{ item.public_dns_name }} port=22 search_regex=OpenSSH
       with_items: "{{ ec2.instances }}"
 
-    - name: Configure instance(s)
+    - name: Configure instance
       hosts: ec2_launched
       become: True
-      gather_facts: True
-      shell: >
-        ls
+      shell: ls
