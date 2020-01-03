@@ -76,3 +76,5 @@
         path: ~/kafka_2.12-2.4.0/config/zookeeper.properties
         line: "dataDir=/home/ec2-user/kafka_2.12-2.4.0/data/zookeeper"
         regexp: '^dataDir=.*$'
+    - name: start zookeeper
+      shell: "zookeeper-server-start.sh /home/ec2-user/kafka_2.12-2.4.0/config/zookeeper.properties"
