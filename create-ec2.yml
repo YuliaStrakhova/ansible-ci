@@ -47,6 +47,7 @@
 
 - name: dfdfd
   hosts: ec2_launched
+  gather_facts: False
   tasks:
   - name: jjj
     shell: "ls"
