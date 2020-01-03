@@ -51,6 +51,6 @@
   tasks:
     - name: "Install java"
       yum:
-        name: openjdk-8
+        name: openjdk-8-jdk
         state: present
 
