@@ -49,5 +49,7 @@
   hosts: ec2_launched
   gather_facts: False
   tasks:
-  - name: jjj
-    shell: "ls"
+    - shell: "cd .."
+    - shell: "pwd"
+    - shell:  "ls"
+
