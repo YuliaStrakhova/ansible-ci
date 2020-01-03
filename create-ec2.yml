@@ -67,4 +67,12 @@
       lineinfile:
         path: ~/.bashrc
         line: export PATH=/home/ec2-user/kafka_2.12-2.4.0/bin:$PATH
-
+    - name: add data dir
+      file:
+          path: ~/kafka_2.12-2.4.0/data/zookeeper
+          state: directory
+    - name: add zookeeper data comfig properties
+      lineinfile:
+        path: ~/kafka_2.12-2.4.0/config/zookeeper.properties
+        line:dataDir=/home/ec2-user/kafka_2.12-2.4.0/data/zookeeper
+        regexp: '^dataDir=.*$'
