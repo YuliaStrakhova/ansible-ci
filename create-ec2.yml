@@ -88,4 +88,4 @@
           line: "log.dirs=/home/ec2-user/kafka_2.12-2.4.0/data/kafka"
           regexp: '^log.dirs=.*$'
     - name: start kafka
-        shell: "kafka-server-start.sh -daemon /home/ec2-user/kafka_2.12-2.4.0/config/server.properties"
+      shell: "kafka-server-start.sh -daemon /home/ec2-user/kafka_2.12-2.4.0/config/server.properties"
