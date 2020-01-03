@@ -21,7 +21,7 @@
       ec2:
         image: ami-00068cd7555f543d5
         region: "{{ region }}"
-        instance_type: t3.micro
+        instance_type: t2.small
         exact_count: 1
         count_tag:
           Name: ansiblebook
