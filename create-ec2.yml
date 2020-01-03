@@ -33,7 +33,6 @@
         wait: true
       register: ec2
 
-    - debug: var=ec2
 
     - name: Add new instance to host group
       add_host:
@@ -64,4 +63,8 @@
         remote_src: yes
         src: kafka_2.12-2.4.0.tgz
         dest: .
+    - name: inset PATH
+      lineinfile:
+        path: ~/.bashrc
+        line: export PATH=/home/ec2-user/kafka_2.12-2.4.0/bin:$PATH
 
