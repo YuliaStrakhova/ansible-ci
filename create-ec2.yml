@@ -63,4 +63,4 @@
       unarchive:
         src: kafka_2.12-2.4.0.tgz
         dest: .
-        remote_src: yes
+        remote_src: no
