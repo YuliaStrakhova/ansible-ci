@@ -3,6 +3,7 @@
   vars:
     prefix: ansible-learning
     region: us-east-1
+    my_home_ip: "5.18.163.44"
 
   tasks:
     - name: ssh security group
@@ -16,6 +17,12 @@
             from_port: 22
             to_port: 22
             cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 9092
+            cidr_ip: "{{ my_home_ip }}/0"
+          - proto: tcp
+            from_port: 2181
+            cidr_ip: "{{ my_home_ip }}/0"
 
     - name: start the instance
       ec2:
