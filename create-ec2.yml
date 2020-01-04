@@ -26,9 +26,9 @@
             to_port: 2181
             cidr_ip: "{{ my_home_ip }}/0"
       register: ec2_group
-    debug: var=ec2_group
+    - debug: var=ec2_group
 
-      - name: start the instance
+    - name: start the instance
       ec2:
         image: ami-00068cd7555f543d5
         region: "{{ region }}"
