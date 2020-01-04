@@ -58,7 +58,7 @@
       get_url:
         url: http://mirror.linux-ia64.org/apache/kafka/2.4.0/kafka_2.12-2.4.0.tgz
         dest: .
-        timeout: 20
+        timeout: 30
     - name: unarchive
       unarchive:
         remote_src: yes
