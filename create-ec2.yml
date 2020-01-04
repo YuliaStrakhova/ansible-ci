@@ -19,9 +19,11 @@
             cidr_ip: 0.0.0.0/0
           - proto: tcp
             from_port: 9092
+            to_port: 9092
             cidr_ip: "{{ my_home_ip }}/0"
           - proto: tcp
             from_port: 2181
+            to_port: 2181
             cidr_ip: "{{ my_home_ip }}/0"
 
     - name: start the instance
