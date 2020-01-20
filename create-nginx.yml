@@ -64,13 +64,13 @@
         name: java-1.8.0-openjdk-devel
         state: present
       become: yes
-    - shell: "pwd"
+    - shell: "wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm"
 
 
 
 
-  # wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
-  #
+
+
 
 
 
