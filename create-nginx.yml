@@ -30,7 +30,7 @@
 
     - name: start the instance
       ec2:
-        image: ami-42a2532b
+        image: ami-02ddb83ff84ca592a
         region: "{{ region }}"
         instance_type: t2.small
         exact_count: 1
@@ -65,6 +65,12 @@
         state: present
       become: yes
     - shell: "pwd"
+
+
+
+
+  # wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+  #
 
 
 
