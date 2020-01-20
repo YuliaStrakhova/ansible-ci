@@ -26,9 +26,9 @@
             to_port: 2181
             cidr_ip: "{{ my_home_ip }}/32"
           - proto: tcp
-              from_port: 80
-              to_port: 80
-              cidr_ip: "{{ my_home_ip }}/32"
+            from_port: 80
+            to_port: 80
+            cidr_ip: "{{ my_home_ip }}/32"
       register: ec2_group
     - debug: var=ec2_group
 
