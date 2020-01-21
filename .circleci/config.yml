@@ -54,7 +54,7 @@ jobs:
           command:  |
             source  venv/bin/activate
             ansible all -m ping
-            ansible-playbook create-nginx.yml
+            ansible-playbook create-nginx.yml -vvv
 
 
       - store_artifacts:
