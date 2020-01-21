@@ -70,7 +70,10 @@
       become: yes
     - shell: "wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm"
       become: yes
-    -
+    - shell: "rpm –Uvh nginx-release-centos-7-0.el7.ngx.noarch.rpm"
+      become: yes
+    - shell: "yum install nginx"
+      become: yes
 
 
 
