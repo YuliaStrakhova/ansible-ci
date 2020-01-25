@@ -31,6 +31,7 @@
     - name: Create task definition
       ecs_taskdefinition:
           family: nginx
+          region: "{{ region }}"
           containers:
             - name: nginx
               essential: true
