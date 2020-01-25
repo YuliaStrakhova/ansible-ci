@@ -72,7 +72,7 @@
         memory: 1024
         state: present
         network_mode: awsvpc
-        execution_role_arn:
+        execution_role_arn: "{{role.arn}}"
       register: task_def
     - debug: var=task_def
 
