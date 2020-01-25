@@ -7,8 +7,8 @@
     role: "edu-project-ecs-role"
 
   tasks:
-   - name: ssh security group
-     ec2_group:
+    - name: ssh security group
+      ec2_group:
         name: "{{ prefix }}-group"
         description: allow ssh access
         region: "{{ region }}"
@@ -26,53 +26,53 @@
             from_port: 2181
             to_port: 2181
             cidr_ip: "{{ my_home_ip }}/32"
-     register: ec2_group
-   - debug: var=ec2_group
+      register: ec2_group
+    - debug: var=ec2_group
 
 
-   - name: "Create a role and attach a managed policy called 'PowerUserAccess'"
-     iam_role:
-       name: "{{ role }}"
-       assume_role_policy_document: "{{ lookup('file','policy-ecs-task-def.json') }}"
-       region: us-east-1
-       managed_policy:
-         - arn:aws:iam::aws:policy/CloudWatchFullAccess
-         - arn:aws:iam::aws:policy/AmazonEC2FullAccess
-         - arn:aws:iam::aws:policy/AWSXrayFullAccess
-     register: role
-   - debug: var=role
+    - name: "Create a role and attach a managed policy called 'PowerUserAccess'"
+      iam_role:
+        name: "{{ role }}"
+        assume_role_policy_document: "{{ lookup('file','policy-ecs-task-def.json') }}"
+        region: us-east-1
+        managed_policy:
+          - arn:aws:iam::aws:policy/CloudWatchFullAccess
+          - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+          - arn:aws:iam::aws:policy/AWSXrayFullAccess
+      register: role
+    - debug: var=role
 
 
     - name: Create cluster
       # Cluster creation
       ecs_cluster:
-          name: edu-project
-          region: "{{ region }}"
-          state: present
+        name: edu-project
+        region: "{{ region }}"
+        state: present
 
     - name: Create task definition
       ecs_taskdefinition:
-          family: edu-project-task-def
-          region: "{{ region }}"
-          containers:
-            - name: nginx
-              essential: true
-              image: "nginx"
-              portMappings:
-                - containerPort: 8080
-                  hostPort:      8080
-              logConfiguration:
-                logDriver: awslogs
-                options:
-                  awslogs-group: /ecs/test-cluster-taskdef
-                  awslogs-region: "{{ region }}"
-                  awslogs-stream-prefix: ecs
-          launch_type: FARGATE
-          cpu: 512
-          memory: 1024
-          state: present
-          network_mode: awsvpc
-          execution_role_arn:
+        family: edu-project-task-def
+        region: "{{ region }}"
+        containers:
+          - name: nginx
+            essential: true
+            image: "nginx"
+            portMappings:
+              - containerPort: 8080
+                hostPort:      8080
+            logConfiguration:
+              logDriver: awslogs
+              options:
+                awslogs-group: /ecs/test-cluster-taskdef
+                awslogs-region: "{{ region }}"
+                awslogs-stream-prefix: ecs
+        launch_type: FARGATE
+        cpu: 512
+        memory: 1024
+        state: present
+        network_mode: awsvpc
+        execution_role_arn:
       register: task_def
     - debug: var=task_def
 
