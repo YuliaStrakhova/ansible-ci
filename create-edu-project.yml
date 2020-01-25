@@ -32,6 +32,7 @@
       # Cluster creation
       ecs_cluster:
           name: edu-project
+          region: "{{ region }}"
           state: present
 
     - name: Create task definition
