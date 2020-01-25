@@ -82,6 +82,7 @@
     - name: Run task
       ecs_task:
         operation: run
+        region: "{{ region }}"
         cluster: "{{ cluster }}"
         task_definition: "{{ task_def }}"
         count: 1
@@ -91,6 +92,7 @@
     - name: Start a task
       ecs_task:
         operation: start
+        region: "{{ region }}"
         cluster:  "{{ cluster }}"
         task_definition: "{{ task_def }}"
         task: "{{ task_output.arn }}"
