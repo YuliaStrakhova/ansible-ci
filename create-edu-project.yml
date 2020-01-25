@@ -75,8 +75,8 @@
         state: present
         network_mode: awsvpc
         execution_role_arn: "{{role.arn}}"
-      register: task_def
-    - debug: var=task_def
+      register: task_def_out
+    - debug: var=task_def_out
 
 
     - name: Run task
