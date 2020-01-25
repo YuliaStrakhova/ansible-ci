@@ -28,9 +28,15 @@
       register: ec2_group
     - debug: var=ec2_group
 
+    - name: Create cluster
+      # Cluster creation
+      ecs_cluster:
+          name: edu-project
+          state: present
+
     - name: Create task definition
       ecs_taskdefinition:
-          family: nginx
+          family: edu-project-task-def
           region: "{{ region }}"
           containers:
             - name: nginx
@@ -50,3 +56,9 @@
           memory: 1024
           state: present
           network_mode: bridge
+      register: task_def
+    - debug: var=task_def
+
+    - name: Create task definition
+      ecs_task:
+
