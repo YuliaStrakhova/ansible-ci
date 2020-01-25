@@ -8,7 +8,7 @@
 
   tasks:
    - name: ssh security group
-      ec2_group:
+     ec2_group:
         name: "{{ prefix }}-group"
         description: allow ssh access
         region: "{{ region }}"
@@ -26,7 +26,7 @@
             from_port: 2181
             to_port: 2181
             cidr_ip: "{{ my_home_ip }}/32"
-      register: ec2_group
+     register: ec2_group
    - debug: var=ec2_group
 
 
