@@ -6,7 +6,7 @@
     my_home_ip: "5.18.163.44"
     role: "edu-project-ecs-role"
     cluster: "edu-project-cluster"
-    task-def: "edu-project-task-def"
+    task_def: "edu-project-task-def"
 
   tasks:
     - name: ssh security group
@@ -54,7 +54,7 @@
 
     - name: Create task definition
       ecs_taskdefinition:
-        family: "{{ task-def }}"
+        family: "{{ task_def }}"
         region: "{{ region }}"
         containers:
           - name: nginx
@@ -83,7 +83,7 @@
       ecs_task:
         operation: run
         cluster: "{{ cluster }}"
-        task_definition: "{{ task-def }}"
+        task_definition: "{{ task_def }}"
         count: 1
         started_by: ansible_user
       register: task_output
@@ -92,7 +92,7 @@
       ecs_task:
         operation: start
         cluster:  "{{ cluster }}"
-        task_definition: "{{ task-def }}"
+        task_definition: "{{ task_def }}"
         task: "{{ task_output.arn }}"
         container_instances:
           - arn:aws:ecs:us-west-2:172139249013:container-instance/79c23f22-876c-438a-bddf-55c98a3538a8
