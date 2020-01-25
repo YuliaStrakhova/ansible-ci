@@ -7,7 +7,7 @@
     role: "edu-project-ecs-role"
 
   tasks:
-    - name: ssh security group
+   - name: ssh security group
       ec2_group:
         name: "{{ prefix }}-group"
         description: allow ssh access
@@ -27,7 +27,7 @@
             to_port: 2181
             cidr_ip: "{{ my_home_ip }}/32"
       register: ec2_group
-    - debug: var=ec2_group
+   - debug: var=ec2_group
 
 
    - name: "Create a role and attach a managed policy called 'PowerUserAccess'"
