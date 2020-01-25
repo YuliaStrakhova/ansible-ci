@@ -4,6 +4,7 @@
     prefix: ansible-learning
     region: us-east-1
     my_home_ip: "5.18.163.44"
+    role: "edu-project-ecs-role"
 
   tasks:
     - name: ssh security group
@@ -27,6 +28,20 @@
             cidr_ip: "{{ my_home_ip }}/32"
       register: ec2_group
     - debug: var=ec2_group
+
+
+   - name: "Create a role and attach a managed policy called 'PowerUserAccess'"
+     iam_role:
+       name: "{{ role }}"
+       assume_role_policy_document: "{{ lookup('file','policy-ecs-task-def.json') }}"
+       region: us-east-1
+       managed_policy:
+         - arn:aws:iam::aws:policy/CloudWatchFullAccess
+         - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+         - arn:aws:iam::aws:policy/AWSXrayFullAccess
+     register: role
+   - debug: var=role
+
 
     - name: Create cluster
       # Cluster creation
@@ -57,6 +72,7 @@
           memory: 1024
           state: present
           network_mode: awsvpc
+          execution_role_arn:
       register: task_def
     - debug: var=task_def
 
