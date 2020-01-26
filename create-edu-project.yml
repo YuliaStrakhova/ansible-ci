@@ -11,8 +11,8 @@
 
     #manual created
     vpc_id: "vpc-00b7cafb9452be62d"
-    subnet_id_1: ""
-    subnet_id_2: ""
+    subnet_id_1: "subnet-069f0b93d07f59d85"
+    subnet_id_2: "subnet-0f348b2f7349b25f3"
 
   tasks:
     - name: ssh security group
@@ -95,8 +95,8 @@
         started_by: ansible_user
         network_configuration:
           subnets:
-            - edu-1
-            - edu-2
+            - "{{ subnet_id_1 }}"
+            - "{{ subnet_id_2 }}"
           security_groups:
             - "{{ec2_group.group_name}}"
       register: task_output
