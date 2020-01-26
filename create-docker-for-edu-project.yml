@@ -67,32 +67,32 @@
       wait_for: host={{ item.public_dns_name }} port=22 search_regex=OpenSSH
       with_items: "{{ ec2.tagged_instances }}"
 
+- name: install docker
+  hosts: ec2_launched
+  gather_facts: False
+  tasks:
+    - name: upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+      become: yes
+      register: update_all
+    - debug: var=update_all
     - name: install docker
-      hosts: ec2_launched
-      gather_facts: False
-      tasks:
-        - name: upgrade all packages
-          yum:
-            name: '*'
-            state: latest
-          become: yes
-          register: update_all
-        - debug: var=update_all
-        - name: install docker
-          yum:
-            name: docker
-            state: present
-          become: yes
-        - name: docker start
-          service:
-            name: docker
-            state: started
-          become: yes
-        - name: sudo usermod -a -G docker ec2-user
-          user:
-            name: ec2-user
-            groups: docker
-            append: yes
-          become: yes
+      yum:
+        name: docker
+        state: present
+      become: yes
+    - name: docker start
+      service:
+        name: docker
+        state: started
+      become: yes
+    - name: sudo usermod -a -G docker ec2-user
+      user:
+        name: ec2-user
+        groups: docker
+        append: yes
+      become: yes
 
 
