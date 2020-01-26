@@ -20,7 +20,7 @@
         name: "{{ prefix }}-group"
         description: allow ssh access
         region: "{{ region }}"
-        vpc_id: {{ vpc_id }}
+        vpc_id: "{{ vpc_id }}"
         rules:
           - proto: tcp
             from_port: 22
