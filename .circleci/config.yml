@@ -54,7 +54,7 @@ jobs:
           command:  |
             source  venv/bin/activate
             ansible all -m ping
-            ansible-playbook create-edu-project.yml
+            ansible-playbook create-docker-for-edu-project.yml
 
 
       - store_artifacts:
