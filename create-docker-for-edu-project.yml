@@ -82,16 +82,24 @@
         name: docker
         state: present
       become: yes
+      register: docker
+    - debug: var=docker
+
     - name: docker start
       service:
         name: docker
         state: started
       become: yes
+      register: docker_start
+     - debug: var=docker_start
+
     - name: sudo usermod -a -G docker ec2-user
       user:
         name: ec2-user
         groups: docker
         append: yes
       become: yes
+      register: add_user
+    - debug: var=add_user
 
 
