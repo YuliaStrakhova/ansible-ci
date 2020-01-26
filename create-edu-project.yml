@@ -17,7 +17,7 @@
   tasks:
     - name: ssh security group
       ec2_group:
-        name: "{{ prefix }}-group"
+        name: "{{ prefix }}"
         description: allow ssh access
         region: "{{ region }}"
         vpc_id: "{{ vpc_id }}"
