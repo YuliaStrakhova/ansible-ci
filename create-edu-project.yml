@@ -1,7 +1,7 @@
 - name: Create an ubuntu instance on Amazon EC2
   hosts: localhost
   vars:
-    prefix: "ansible-learning"
+    prefix: "edu-project-security-group"
     region: "us-east-1"
     my_home_ip: "5.18.163.44"
     role: "edu-project-ecs-role"
@@ -100,6 +100,7 @@
             - sg-aaaa1111
             - my_security_group
       register: task_output
+    - debug: var=task_def_out
 
     - name: Start a task
       ecs_task:
@@ -116,8 +117,8 @@
             - edu-1
             - edu-2
           security_groups:
-            - edu-1
-            - edu-2
+            - "{{ec2_group.group_name}}"
       register: task_output
+    - debug: var=task_output
 
 
