@@ -1,0 +1,98 @@
+- name: Create an ubuntu instance on Amazon EC2
+  hosts: localhost
+  vars:
+    prefix: "edu-project-security-group"
+    region: "us-east-1"
+    my_home_ip: "5.18.163.44"
+    role: "edu-project-role"
+
+
+
+    #manual created
+    vpc_id: "vpc-078dbaebee037409b"
+    subnet_id_1: "subnet-069f0b93d07f59d85"
+    subnet_id_2: "subnet-0f348b2f7349b25f3"
+
+    ami_id: "ami-00068cd7555f543d5"
+    #key pair name
+    key_name: "for-github"
+
+  tasks:
+    - name: ssh security group
+      ec2_group:
+        name: "{{ prefix }}"
+        description: allow ssh access
+        region: "{{ region }}"
+        vpc_id: "{{ vpc_id }}"
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 9092
+            to_port: 9092
+            cidr_ip: "{{ my_home_ip }}/32"
+          - proto: tcp
+            from_port: 2181
+            to_port: 2181
+            cidr_ip: "{{ my_home_ip }}/32"
+      register: ec2_group
+    - debug: var=ec2_group
+
+    - name: start the instance
+      ec2:
+        image: "{{ ami_id }}"
+        region: "{{ region }}"
+        instance_type: t2.small
+        exact_count: 1
+        count_tag:
+          Name: ansiblebook
+        key_name: "{{ key_name }}"
+        group: ["{{ prefix }}-group"]
+        assign_public_ip: yes
+        instance_tags: { Name: ansiblebook, type: one, env: test }
+        vpc_subnet_id: "{{ subnet_id_1 }}"
+        wait: true
+      register: ec2
+
+
+    - name: Add new instance to host group
+      add_host:
+        hostname: "{{ item.public_dns_name }}"
+        groupname: ec2_launched
+      loop: "{{ ec2.tagged_instances }}"
+
+    - name: wait for ssh server to be running
+      wait_for: host={{ item.public_dns_name }} port=22 search_regex=OpenSSH
+      with_items: "{{ ec2.tagged_instances }}"
+
+    - name: install docker
+      hosts: ec2_launched
+      gather_facts: False
+      tasks:
+        - name: upgrade all packages
+          yum:
+            name: '*'
+            state: latest
+          become: yes
+          register: update_all
+        - debug: var=update_all
+        - name: install docker
+          yum:
+            name: docker
+            state: present
+          become: yes
+        - name: docker start
+          service:
+            name: docker
+            state: started
+          become: yes
+        - name: sudo usermod -a -G docker ec2-user
+          user:
+            name: ec2-user
+            groups: docker
+            append: yes
+          become: yes
+
+
