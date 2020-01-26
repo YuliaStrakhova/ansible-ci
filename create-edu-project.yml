@@ -8,13 +8,19 @@
     cluster: "edu-project-cluster"
     task_def: "edu-project-task-def"
 
+
+    #manual created
+    vpc_id: "vpc-00b7cafb9452be62d"
+    subnet_id_1: ""
+    subnet_id_2: ""
+
   tasks:
     - name: ssh security group
       ec2_group:
         name: "{{ prefix }}-group"
         description: allow ssh access
         region: "{{ region }}"
-        vpc_id: vpc-00b7cafb9452be62d
+        vpc_id: {{ vpc_id }}
         rules:
           - proto: tcp
             from_port: 22
@@ -87,6 +93,12 @@
         task_definition: "{{ task_def }}"
         count: 1
         started_by: ansible_user
+        network_configuration:
+          subnets:
+            - subnet-abcd1234
+          security_groups:
+            - sg-aaaa1111
+            - my_security_group
       register: task_output
 
     - name: Start a task
@@ -101,10 +113,11 @@
         started_by: ansible_user
         network_configuration:
           subnets:
-            - subnet-abcd1234
+            - edu-1
+            - edu-2
           security_groups:
-            - sg-aaaa1111
-            - my_security_group
+            - edu-1
+            - edu-2
       register: task_output
 
 
