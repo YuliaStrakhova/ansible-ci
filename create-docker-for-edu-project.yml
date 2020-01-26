@@ -1,7 +1,7 @@
 - name: Create an ubuntu instance on Amazon EC2
   hosts: localhost
   vars:
-    prefix: "edu-project-security-group"
+    group_name: "edu-project-security-group"
     region: "us-east-1"
     my_home_ip: "5.18.163.44"
     role: "edu-project-role"
@@ -20,7 +20,7 @@
   tasks:
     - name: ssh security group
       ec2_group:
-        name: "{{ prefix }}"
+        name: "{{ group_name }}"
         description: allow ssh access
         region: "{{ region }}"
         vpc_id: "{{ vpc_id }}"
@@ -49,7 +49,7 @@
         count_tag:
           Name: ansiblebook
         key_name: "{{ key_name }}"
-        group: ["{{ prefix }}-group"]
+        group: [" {{ pgroup_name }} "]
         assign_public_ip: yes
         instance_tags: { Name: ansiblebook, type: one, env: test }
         vpc_subnet_id: "{{ subnet_id_1 }}"
