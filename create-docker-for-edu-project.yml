@@ -91,7 +91,7 @@
         state: started
       become: yes
       register: docker_start
-     - debug: var=docker_start
+    - debug: var=docker_start
 
     - name: sudo usermod -a -G docker ec2-user
       user:
