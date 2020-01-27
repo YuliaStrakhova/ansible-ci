@@ -5,13 +5,18 @@
     region: us-east-1
     my_home_ip: "5.18.163.44"
 
+      #manual created
+      vpc_id: "vpc-078dbaebee037409b"
+      subnet_id_1: "subnet-069f0b93d07f59d85"
+      subnet_id_2: "subnet-0f348b2f7349b25f3"
+
   tasks:
     - name: ssh security group
       ec2_group:
         name: "{{ prefix }}-group"
         description: allow ssh access
         region: "{{ region }}"
-        vpc_id: vpc-00b7cafb9452be62d
+        vpc_id: "{{ vpc_id }}"
         rules:
           - proto: tcp
             from_port: 22
@@ -40,7 +45,7 @@
         group: ["{{ prefix }}-group"]
         assign_public_ip: yes
         instance_tags: { Name: ansiblebook, type: one, env: test }
-        vpc_subnet_id: subnet-056a36446d0695b33
+        vpc_subnet_id: "{{ subnet_id_1 }}"
         wait: true
       register: ec2
 
