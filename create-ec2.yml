@@ -55,6 +55,7 @@
       add_host:
           hostname: "{{ item.public_dns_name }}"
           groupname: ec2_launched
+          #internal_ip: "{{ item. }}"
       loop: "{{ ec2.tagged_instances }}"
 
     - name: wait for ssh server to be running
@@ -105,5 +106,10 @@
           path: ~/kafka_2.12-2.4.0/config/server.properties
           line: "log.dirs=/home/ec2-user/kafka_2.12-2.4.0/data/kafka"
           regexp: '^log.dirs=.*$'
+    - name: add kafka data comfig properties
+        lineinfile:
+          path: ~/kafka_2.12-2.4.0/config/server.properties
+          line: "advertised.listeners=PLAINTEXT://{{ ec2_launched.hostname }}:9092"
+          regexp: '^#?advertised.listeners=.*$'
     - name: start kafka
       shell: "kafka-server-start.sh -daemon /home/ec2-user/kafka_2.12-2.4.0/config/server.properties"
