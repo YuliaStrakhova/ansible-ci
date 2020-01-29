@@ -113,7 +113,7 @@
           regexp: '^#?advertised.listeners=.*$'
 
     - name: add kafka data comfig properties
-        lineinfile:
+      lineinfile:
           path: ~/kafka_2.12-2.4.0/config/server.properties
           line: "listeners=PLAINTEXT://{{ hostvars[inventory_hostname].internal_ip }}:9092"
           regexp: '^#?listeners=.*$'
