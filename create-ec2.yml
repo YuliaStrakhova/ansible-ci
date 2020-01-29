@@ -110,7 +110,7 @@
     - name: add kafka data comfig properties
       lineinfile:
           path: ~/kafka_2.12-2.4.0/config/server.properties
-          line: "advertised.listeners=PLAINTEXT://{{ hostname }}:9092"
+          line: "advertised.listeners=PLAINTEXT://{{ ansible_hostname }}:9092"
           regexp: '^#?advertised.listeners=.*$'
 
     - name: add kafka data comfig properties
