@@ -64,7 +64,6 @@
 
 - name: install kafka
   hosts: ec2_launched
-  gather_facts: False
   tasks:
     - debug: var=item
     - name: "Install java"
