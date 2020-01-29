@@ -110,13 +110,13 @@
     - name: add kafka data comfig properties
       lineinfile:
           path: ~/kafka_2.12-2.4.0/config/server.properties
-          line: "advertised.listeners=PLAINTEXT://{{ hostvars[inventory_hostname].hostname }}:9092"
+          line: "advertised.listeners=PLAINTEXT://{{ hostname }}:9092"
           regexp: '^#?advertised.listeners=.*$'
 
     - name: add kafka data comfig properties
       lineinfile:
           path: ~/kafka_2.12-2.4.0/config/server.properties
-          line: "listeners=PLAINTEXT://{{ hostvars[inventory_hostname].internal_ip }}:9092"
+          line: "listeners=PLAINTEXT://{{ internal_ip }}:9092"
           regexp: '^#?listeners=.*$'
 
     - name: start kafka
