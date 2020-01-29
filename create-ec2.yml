@@ -107,7 +107,7 @@
           line: "log.dirs=/home/ec2-user/kafka_2.12-2.4.0/data/kafka"
           regexp: '^log.dirs=.*$'
     - name: add kafka data comfig properties
-        lineinfile:
+      lineinfile:
           path: ~/kafka_2.12-2.4.0/config/server.properties
           line: "advertised.listeners=PLAINTEXT://{{ ec2_launched.hostname }}:9092"
           regexp: '^#?advertised.listeners=.*$'
