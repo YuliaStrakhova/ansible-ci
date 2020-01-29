@@ -56,6 +56,7 @@
           hostname: "{{ item.public_dns_name }}"
           groupname: ec2_launched
           internal_ip: "{{ item.private_ip }}"
+          dns_name: "{{ dns_name }}"
       loop: "{{ ec2.tagged_instances }}"
 
     - name: wait for ssh server to be running
@@ -109,7 +110,7 @@
     - name: add kafka data comfig properties
       lineinfile:
           path: ~/kafka_2.12-2.4.0/config/server.properties
-          line: "advertised.listeners=PLAINTEXT://{{ ansible_hostname }}:9092"
+          line: "advertised.listeners=PLAINTEXT://{{ dns_name }}:9092"
           regexp: '^#?advertised.listeners=.*$'
 
     - name: add kafka data comfig properties
