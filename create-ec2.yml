@@ -56,7 +56,7 @@
           hostname: "{{ item.public_dns_name }}"
           groupname: ec2_launched
           internal_ip: "{{ item.private_ip }}"
-          dns_name: "{{ dns_name }}"
+          dns_name: "{{ item.public_dns_name }}"
       loop: "{{ ec2.tagged_instances }}"
 
     - name: wait for ssh server to be running
