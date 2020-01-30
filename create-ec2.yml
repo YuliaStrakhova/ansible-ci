@@ -119,5 +119,6 @@
           line: "listeners=PLAINTEXT://{{ internal_ip }}:9092"
           regexp: '^#?listeners=.*$'
 
+
     - name: start kafka
       shell: "kafka-server-start.sh -daemon /home/ec2-user/kafka_2.12-2.4.0/config/server.properties"
