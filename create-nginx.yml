@@ -5,6 +5,9 @@
     region: us-east-1
     my_home_ip: "5.18.163.44"
 
+    ami: ami-07ebfd5b3428b6f4d  #ubuntu
+    #ami: ami-02ddb83ff84ca592a # centOS
+
   tasks:
     - name: ssh security group
       ec2_group:
@@ -34,7 +37,7 @@
 
     - name: start the instance
       ec2:
-        image: ami-02ddb83ff84ca592a
+        image: "{{ ami-02ddb83ff84ca592a }}"
         region: "{{ region }}"
         instance_type: t2.small
         exact_count: 1
