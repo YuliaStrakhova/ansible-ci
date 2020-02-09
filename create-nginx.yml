@@ -79,11 +79,13 @@
           path: /etc/ssh/sshd_config
           line: "ClientAliveInterval 120"
           regexp: '^#ClientAliveInterval.*$'
+      become: yes
     - name: ClientAliveCountMax
       lineinfile:
           path: /etc/ssh/sshd_config
           line: "ClientAliveCountMax 720"
           regexp: '^#ClientAliveCountMax.*$'
+      become: yes
     - name: Restart service httpd, in all cases
       service:
         name: ssh
