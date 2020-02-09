@@ -12,7 +12,7 @@
 
     vpc_id: "vpc-078dbaebee037409b"
     subnet_id_1: "subnet-069f0b93d07f59d85"
-    subnet_id_2: "subnet-0f348b2f7349b25f3""
+    subnet_id_2: "subnet-0f348b2f7349b25f3"
 
   tasks:
     - name: ssh security group
