@@ -68,19 +68,19 @@
       wait_for: host={{ item.public_dns_name }} port=22 search_regex=OpenSSH
       with_items: "{{ ec2.tagged_instances }}"
 
-- name: install kafka
-  hosts: ec2_launched
-  gather_facts: False
-  tasks:
-    - name: "Install java"
-      yum:
-        name: java-1.8.0-openjdk-devel
-        state: present
-      become: yes
-    - shell: "wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm"
-      become: yes
-    - shell: "yum install nginx"
-      become: yes
+#- name: install kafka
+#  hosts: ec2_launched
+#  gather_facts: False
+#  tasks:
+#    - name: "Install java"
+#      yum:
+#        name: java-1.8.0-openjdk-devel
+#        state: present
+#      become: yes
+#    - shell: "wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm"
+#      become: yes
+#    - shell: "yum install nginx"
+#      become: yes
 
 
 
