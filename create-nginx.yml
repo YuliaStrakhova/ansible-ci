@@ -75,12 +75,12 @@
   gather_facts: False
   tasks:
     - name: ClientAliveInterval
-        lineinfile:
+      lineinfile:
           path: /etc/ssh/sshd_config
           line: "ClientAliveInterval 120"
           regexp: '^#ClientAliveInterval.*$'
     - name: ClientAliveCountMax
-        lineinfile:
+      lineinfile:
           path: /etc/ssh/sshd_config
           line: "ClientAliveCountMax 720"
           regexp: '^#ClientAliveCountMax.*$'
