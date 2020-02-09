@@ -90,6 +90,7 @@
       service:
         name: ssh
         state: restarted
+      become: yes
 
 #    - name: "Install java"
 #      yum:
