@@ -68,10 +68,27 @@
       wait_for: host={{ item.public_dns_name }} port=22 search_regex=OpenSSH
       with_items: "{{ ec2.tagged_instances }}"
 
-#- name: install kafka
-#  hosts: ec2_launched
-#  gather_facts: False
-#  tasks:
+
+
+- name: install kafka
+  hosts: ec2_launched
+  gather_facts: False
+  tasks:
+    - name: ClientAliveInterval
+        lineinfile:
+          path: /etc/ssh/sshd_config
+          line: "ClientAliveInterval 120"
+          regexp: '^#ClientAliveInterval.*$'
+    - name: ClientAliveCountMax
+        lineinfile:
+          path: /etc/ssh/sshd_config
+          line: "ClientAliveCountMax 720"
+          regexp: '^#ClientAliveCountMax.*$'
+    - name: Restart service httpd, in all cases
+      service:
+        name: ssh
+        state: restarted
+
 #    - name: "Install java"
 #      yum:
 #        name: java-1.8.0-openjdk-devel
