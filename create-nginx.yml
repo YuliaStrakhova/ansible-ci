@@ -53,7 +53,7 @@
         group: ["{{ prefix }}-group"]
         assign_public_ip: yes
         instance_tags: { Name: ansiblebook, type: one, env: test }
-        vpc_subnet_id: subnet-056a36446d0695b33
+        vpc_subnet_id:  "{{ subnet_id_1 }}"
         wait: true
       register: ec2
 
