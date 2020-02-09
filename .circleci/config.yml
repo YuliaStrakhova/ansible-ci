@@ -54,8 +54,10 @@ jobs:
           command:  |
             source  venv/bin/activate
             ansible all -m ping
-            ansible-playbook create-ec2.yml
-#
+#            ansible-playbook create-ec2.yml
+            ansible-playbook create-nginx.yml
+
+
 
 
 
