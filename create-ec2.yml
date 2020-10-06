@@ -1,7 +1,7 @@
 - name: Create an ubuntu instance on Amazon EC2
   hosts: localhost
   vars:
-    prefix: ansible-learning
+    prefix: ansible-test
     region: us-east-1
     my_home_ip: "5.18.163.44"
 
